@@ -1,0 +1,33 @@
+<result>
+  <data>
+    <charges>
+      <charge>
+        <code>1234568</code>
+        <dueDate>10-05-2020</dueDate>
+        <payNumber>BOLETO PAGO</payNumber>
+        <billetDetails>
+          <bankAccount>0655/46480-8</bankAccount>
+          <ourNumber>176/70018821-3</ourNumber>
+          <barcodeNumber>34191825400000012751767001882130655464808000</barcodeNumber>
+          <portfolio>176</portfolio>
+        </billetDetails>
+      </charge>
+      <charge>
+        <code>123456</code>
+        <dueDate>10-05-2020</dueDate>
+        <payNumber>BOLETO PAGO</payNumber>
+        <billetDetails>
+          <bankAccount>0655/46480-8</bankAccount>
+          <ourNumber>176/70018821-3</ourNumber>
+          <barcodeNumber>34191825400000012751767001882130655464808000</barcodeNumber>
+          <portfolio>176</portfolio>
+        </billetDetails>
+      </charge>
+      <charge>
+        <code>123456</code>
+        <dueDate>10-05-2020</dueDate>
+        <payNumber>BOLETO PAGO</payNumber>
+      </charge>
+    </charges>
+  </data>
+</result>
