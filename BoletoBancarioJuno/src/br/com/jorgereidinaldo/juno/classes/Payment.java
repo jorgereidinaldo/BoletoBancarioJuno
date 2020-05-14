@@ -1,10 +1,13 @@
 package br.com.jorgereidinaldo.juno.classes;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 public class Payment {
 	private String id;
-	private String amount;
+	private BigDecimal amount;
 	private String date;
-	private String fee;
+	private BigDecimal fee;
 	private String type;
 	private String status;
 	private String creditCardId;
@@ -14,24 +17,9 @@ public class Payment {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getAmount() {
-		return amount;
-	}
-	public void setAmount(String amount) {
-		this.amount = amount;
-	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public String getFee() {
-		return fee;
-	}
-	public void setFee(String fee) {
-		this.fee = fee;
-	}
+	
+	
+	
 	public String getType() {
 		return type;
 	}
@@ -50,6 +38,25 @@ public class Payment {
 	public void setCreditCardId(String creditCardId) {
 		this.creditCardId = creditCardId;
 	}
+	public BigDecimal getAmount() {
+		return amount;
+	}
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public BigDecimal getFee() {
+		return fee;
+	}
+	public void setFee(BigDecimal fee) {
+		this.fee = fee;
+	}
+	
 
 
 

@@ -3,6 +3,9 @@ package br.co.jorgereidinaldo.juno.app;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.util.ArrayList;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -14,23 +17,25 @@ import br.com.jorgereidinaldo.juno.classes.Data;
 import br.com.jorgereidinaldo.juno.classes.Payment;
 import br.com.jorgereidinaldo.juno.classes.Payments;
 import br.com.jorgereidinaldo.juno.classes.Result;
+import br.com.jorgereidinaldo.juno.classes.RetornoPagamentoJuno;
+import br.com.jorgereidinaldo.juno.util.Util;
 
 public class Xml {
 
-	public static void main(String[] args) throws FileNotFoundException {
-	//	lerXML();
+	public static void main(String[] args) throws FileNotFoundException, ParseException {
+	lerXML("C:\\juno.xml");
 	//gravaXml();
 			
 		
 	}	
-	private static Result lerXML(String caminhoXML) throws FileNotFoundException {
+	private static ArrayList<RetornoPagamentoJuno> lerXML(String caminhoXML) throws FileNotFoundException, ParseException {
 		XStream xstream = new XStream(new DomDriver());
-		
-		if(!new File(caminhoXML).exists()) {
+		ArrayList<RetornoPagamentoJuno> lista=new ArrayList<RetornoPagamentoJuno>();
+		if(new File(caminhoXML).exists()) {
 			   // Crio arquivo
-			}
+			
 		
-		 FileInputStream input = new FileInputStream(new File("C:\\juno.xml"));
+		 FileInputStream input = new FileInputStream(new File(caminhoXML));
 		xstream.alias("result", Result.class);
 		xstream.alias("data", Data.class);
 		 xstream.alias("charges", Charges.class);
@@ -51,18 +56,33 @@ public class Xml {
 		 System.out.println(input);
 		Result xml1 = (Result) xstream.fromXML(input);
 		//System.out.println(input);
-
+for( Charge  result: xml1.getData().getCharges().getCharge()) {
+	RetornoPagamentoJuno r=new RetornoPagamentoJuno();
+	r.setAmount(result.getPayments().getPayment().getAmount());
+	r.setBankAccount(result.getBilletDetails().getBankAccount());
+	r.setCode(result.getCode());
+	r.setDate(Util.dataFormatada(result.getPayments().getPayment().getDate()));
+	r.setDueDate(Util.dataFormatada(result.getDueDate()));
+	r.setFee(result.getPayments().getPayment().getFee());
+	r.setLink(result.getLink());
+	r.setOurNumber(result.getBilletDetails().getOurNumber());
+	r.setPayNumber(result.getPayNumber());
+	r.setStatus(result.getPayments().getPayment().getStatus());
+	r.setType(result.getPayments().getPayment().getType());
+	
+	lista.add(r);
+}
 		/** Imprimindo o resultado no console **/
 		System.out.println("Nome  :" + xml1.getData().getCharges().getCharge().get(0).getDueDate());
-		System.out.println("Valor Pago  :" + xml1.getData().getCharges().getCharge().get(0).getPayments().getPayment().getAmount());
+		System.out.println("Valor Pago  :" + xml1.getData().getCharges().getCharge().get(0).getPayments().getPayment().getDate());
 		//System.out.println("Nome  :" + xml1.getData().getCharges().getCharge().get(0).getBilletDetails().get(0).getBarcodeNumber());
 		//System.out.println("Idade :" + xml1.getIdade());
-return xml1;
 
 
-
+		
 		}
-	
+		return lista;
+	}
 	
 	/*
 	private static String  gravaXml() {
